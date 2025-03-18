@@ -21,6 +21,13 @@
                     <li class="nav-item"><a class="nav-link" href="#">{% trans "Register" %}</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">{% trans "Users" %}</a></li>
                 </ul>
+                <form action="{% url 'set_language' %}" method="post">
+                    {% csrf_token %}
+                    <select name="language" onchange="this.form.submit()">
+                        <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+                        <option value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>Русский</option>
+                    </select>
+                </form>
             </div>
         </div>
     </nav>
