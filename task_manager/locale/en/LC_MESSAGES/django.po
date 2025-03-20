@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-18 17:33+0300\n"
+"POT-Creation-Date: 2025-03-20 14:39+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: task_manager/settings.py:127
-msgid "English"
+#: task_manager/forms.py:7
+msgid "First name"
+msgstr ""
+
+#: task_manager/forms.py:8
+msgid "Last name"
 msgstr ""
 
 #: task_manager/settings.py:128
+msgid "English"
+msgstr ""
+
+#: task_manager/settings.py:129
 msgid "Russian"
 msgstr ""
 
@@ -30,13 +38,103 @@ msgid "My App"
 msgstr ""
 
 #: task_manager/templates/base.html:20
+#: task_manager/templates/users/index.html:5
+#: task_manager/templates/users/index.html:8
+msgid "Users"
+msgstr ""
+
+#: task_manager/templates/base.html:26
+msgid "Logout"
+msgstr ""
+
+#: task_manager/templates/base.html:30
+#: task_manager/templates/users/login.html:5
+#: task_manager/templates/users/login.html:8
+#: task_manager/templates/users/login.html:13
 msgid "Login"
 msgstr ""
 
-#: task_manager/templates/base.html:21
+#: task_manager/templates/base.html:31
+#: task_manager/templates/users/create.html:13
 msgid "Register"
 msgstr ""
 
-#: task_manager/templates/base.html:22
-msgid "Users"
+#: task_manager/templates/users/create.html:5
+#: task_manager/templates/users/create.html:8
+msgid "Registration"
+msgstr ""
+
+#: task_manager/templates/users/delete.html:5
+#: task_manager/templates/users/delete.html:8
+msgid "Delete user"
+msgstr ""
+
+#: task_manager/templates/users/delete.html:10
+msgid "Are you sure you want to delete"
+msgstr ""
+
+#: task_manager/templates/users/delete.html:14
+msgid "Yes, delete"
+msgstr ""
+
+#: task_manager/templates/users/delete.html:15
+msgid "Cancel"
+msgstr ""
+
+#: task_manager/templates/users/index.html:14
+msgid "Username"
+msgstr ""
+
+#: task_manager/templates/users/index.html:15
+msgid "Full name"
+msgstr ""
+
+#: task_manager/templates/users/index.html:16
+msgid "Date joined"
+msgstr ""
+
+#: task_manager/templates/users/index.html:17
+msgid "Actions"
+msgstr ""
+
+#: task_manager/templates/users/index.html:29
+#: task_manager/templates/users/update.html:13
+msgid "Update"
+msgstr ""
+
+#: task_manager/templates/users/index.html:30
+msgid "Delete"
+msgstr ""
+
+#: task_manager/templates/users/update.html:5
+#: task_manager/templates/users/update.html:8
+msgid "Update user"
+msgstr ""
+
+#: task_manager/views.py:29
+msgid "User successfully registered"
+msgstr ""
+
+#: task_manager/views.py:43
+msgid "User successfully updated"
+msgstr ""
+
+#: task_manager/views.py:47
+msgid "You have no rights to change another user"
+msgstr ""
+
+#: task_manager/views.py:60
+msgid "User successfully deleted"
+msgstr ""
+
+#: task_manager/views.py:64
+msgid "You have no rights to delete another user"
+msgstr ""
+
+#: task_manager/views.py:73
+msgid "You are logged in"
+msgstr ""
+
+#: task_manager/views.py:80
+msgid "You are logged out"
 msgstr ""
