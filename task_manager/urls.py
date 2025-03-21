@@ -34,5 +34,5 @@ urlpatterns = [
     # Authentication routes
     path('login/', UserLoginView.as_view(), name='login'),
     path('logout/', UserLogoutView.as_view(), name='logout'),
-    path('statuses/', include('statuses.urls')),
+    path('statuses/', include('task_manager.statuses.urls')),
 ]
