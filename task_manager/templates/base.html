@@ -19,6 +19,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{% url 'users' %}">{% trans "Users" %}</a></li>
                     {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'statuses' %}">{% trans "Statuses" %}</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">{{ user.username }}</a></li>
                         <li class="nav-item">
                             <form action="{% url 'logout' %}" method="post">

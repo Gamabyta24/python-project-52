@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls.i18n import set_language
-from django.urls import path
+from django.urls import path, include
 from .views import index
 from .views import (
     index, UserListView, UserCreateView, UserUpdateView, UserDeleteView,
@@ -34,4 +34,5 @@ urlpatterns = [
     # Authentication routes
     path('login/', UserLoginView.as_view(), name='login'),
     path('logout/', UserLogoutView.as_view(), name='logout'),
+    path('statuses/', include('statuses.urls')),
 ]
