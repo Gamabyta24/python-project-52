@@ -31,7 +31,7 @@ class UserCreateView(CreateView):
 
 class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = User
-    form_class = UserRegistrationForm
+    form_class = UserRegistrationForm 
     template_name = 'users/update.html'
     success_url = reverse_lazy('users')
     
@@ -61,7 +61,7 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return super().form_valid(form)
     
     def handle_no_permission(self):
-        messages.error(self.request, _('You have no rights to delete another user'))
+        messages.error(self.request, _('You have no rights to delete another user'),extra_tags='danger')
         return redirect('users')
 
 class UserLoginView(LoginView):
