@@ -9,6 +9,8 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .forms import UserRegistrationForm
+from django.db.models import Q
+from task_manager.tasks.models import Task
 
 def index(request):
     return render(request,'index.html')
@@ -56,9 +58,19 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         # Проверка, что пользователь удаляет только свой профиль
         return self.request.user.id == self.kwargs['pk']
     
-    def form_valid(self, form):
+    # def form_valid(self, form):
+    #     messages.success(self.request, _('User successfully deleted'))
+    #     return super().form_valid(form)
+    def post(self, request, *args, **kwargs):
+        user = self.get_object()
+        
+        # Check if user is associated with any tasks
+        if Task.objects.filter(Q(creator=user) | Q(executor=user)).exists():
+            messages.error(self.request, _('Cannot delete user because they have associated tasks'))
+            return redirect('users')
+        
         messages.success(self.request, _('User successfully deleted'))
-        return super().form_valid(form)
+        return super().post(request, *args, **kwargs)
     
     def handle_no_permission(self):
         messages.error(self.request, _('You have no rights to delete another user'),extra_tags='danger')
