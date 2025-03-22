@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block title %}{% trans "Delete task" %}{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Delete task" %}</h1>
+    
+    <p>{% trans "Are you sure you want to delete" %} "{{ object.name }}"?</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">{% trans "Yes, delete" %}</button>
+        <a href="{% url 'tasks' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+    </form>
+{% endblock %}

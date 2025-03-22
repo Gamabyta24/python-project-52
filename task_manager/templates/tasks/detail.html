@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block title %}{{ task.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ task.name }}</h1>
+    
+    <div class="card mb-3">
+        <div class="card-header">
+            {% trans "Task information" %}
+        </div>
+        <div class="card-body">
+            <p><strong>{% trans "Description" %}:</strong> {{ task.description }}</p>
+            <p><strong>{% trans "Status" %}:</strong> {{ task.status.name }}</p>
+            <p><strong>{% trans "Creator" %}:</strong> {{ task.creator.first_name }} {{ task.creator.last_name }}</p>
+            <p><strong>{% trans "Executor" %}:</strong> 
+                {% if task.executor %}
+                    {{ task.executor.first_name }} {{ task.executor.last_name }}
+                {% else %}
+                    -
+                {% endif %}
+            </p>
+            <p><strong>{% trans "Created at" %}:</strong> {{ task.created_at|date:"d.m.Y H:i" }}</p>
+        </div>
+    </div>
+    
+    <a href="{% url 'tasks' %}" class="btn btn-primary">{% trans "Back" %}</a>
+    <a href="{% url 'task_update' task.id %}" class="btn btn-secondary">{% trans "Update" %}</a>
+    <a href="{% url 'task_delete' task.id %}" class="btn btn-danger">{% trans "Delete" %}</a>
+{% endblock %}
