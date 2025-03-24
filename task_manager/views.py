@@ -12,12 +12,10 @@ from .forms import UserRegistrationForm
 from django.db.models import Q
 from task_manager.tasks.models import Task
 from django.http import HttpResponse
-# def index(request):
-#     return render(request,'index.html')
+
 def index(request):
-    a = None
-    a.hello() # Creating an error with an invalid line of code
-    return HttpResponse("Hello, world. You're at the pollapp index.")
+    return render(request,'index.html')
+
 
 class UserListView(ListView):
     model = User
