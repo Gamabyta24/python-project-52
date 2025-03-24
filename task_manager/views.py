@@ -11,10 +11,13 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .forms import UserRegistrationForm
 from django.db.models import Q
 from task_manager.tasks.models import Task
-
+from django.http import HttpResponse
+# def index(request):
+#     return render(request,'index.html')
 def index(request):
-    return render(request,'index.html')
-
+    a = None
+    a.hello() # Creating an error with an invalid line of code
+    return HttpResponse("Hello, world. You're at the pollapp index.")
 
 class UserListView(ListView):
     model = User
