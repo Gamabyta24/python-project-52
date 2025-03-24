@@ -15,11 +15,20 @@ class TaskListView(LoginRequiredMixin, ListView):
     context_object_name = 'tasks'
     login_url = reverse_lazy('login')
     filterset_class = TaskFilter
-    def get_filterset(self, filterset_class):
-        # Передаем request в фильтр для доступа к текущему пользователю
-        filterset = super().get_filterset(filterset_class)
-        filterset.request = self.request
-        return filterset
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        filter_applied = any(self.request.GET.get(key) for key in ['status', 'executor', 'labels', 'self_tasks'])
+        self.filterset = self.filterset_class(
+            self.request.GET if filter_applied else None, 
+            queryset=queryset, 
+            request=self.request
+        )
+        return self.filterset.qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = self.filterset
+        return context
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task

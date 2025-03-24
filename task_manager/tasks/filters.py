@@ -9,17 +9,17 @@ from task_manager.statuses.models import Status
 class TaskFilter(django_filters.FilterSet):
     status = django_filters.ModelChoiceFilter(
         label=_('Status'),
-        queryset=lambda: Status.objects.all(),
+        queryset=Status.objects.all(),  # Use .all() as a method call
     )
     
     executor = django_filters.ModelChoiceFilter(
         label=_('Executor'),
-        queryset=lambda: User.objects.all(),
+        queryset=User.objects.all(),  # Use .all() as a method call
     )
     
     labels = django_filters.ModelChoiceFilter(
         label=_('Label'),
-        queryset=Label.objects.all(),
+        queryset=Label.objects.all(),  # Use .all() as a method call
         method='filter_by_labels',
     )
     
@@ -35,7 +35,7 @@ class TaskFilter(django_filters.FilterSet):
         return queryset
     
     def filter_self_tasks(self, queryset, name, value):
-        if value and self.request:
+        if value and hasattr(self, 'request'):
             return queryset.filter(creator=self.request.user)
         return queryset
     
