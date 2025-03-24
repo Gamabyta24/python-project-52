@@ -7,6 +7,16 @@
 {% block content %}
     <h1>{% trans "Tasks" %}</h1>
     
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{% trans "Filter" %}</h5>
+            <form method="get">
+                {% bootstrap_form filter.form %}
+                <button type="submit" class="btn btn-primary">{% trans "Apply" %}</button>
+            </form>
+        </div>
+    </div>
+
     <a href="{% url 'task_create' %}" class="btn btn-primary mb-3">{% trans "Create task" %}</a>
     
     <table class="table table-striped">
@@ -42,6 +52,10 @@
                         <a href="{% url 'task_update' task.id %}" class="btn btn-primary btn-sm">{% trans "Update" %}</a>
                         <a href="{% url 'task_delete' task.id %}" class="btn btn-danger btn-sm">{% trans "Delete" %}</a>
                     </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7">{% trans "No tasks available" %}</td>
                 </tr>
             {% endfor %}
         </tbody>

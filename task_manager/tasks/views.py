@@ -7,12 +7,19 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 
 from .models import Task
 from .forms import TaskForm
+from .filters import TaskFilter
 
 class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = 'tasks/index.html'
     context_object_name = 'tasks'
     login_url = reverse_lazy('login')
+    filterset_class = TaskFilter
+    def get_filterset(self, filterset_class):
+        # Передаем request в фильтр для доступа к текущему пользователю
+        filterset = super().get_filterset(filterset_class)
+        filterset.request = self.request
+        return filterset
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
