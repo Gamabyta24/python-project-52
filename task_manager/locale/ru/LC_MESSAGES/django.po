@@ -170,7 +170,7 @@ msgstr "Пользователи"
 
 #: task_manager/templates/base.html:28
 msgid "Logout"
-msgstr "Выйти"
+msgstr "Выход"
 
 #: task_manager/templates/base.html:32
 #: task_manager/templates/users/login.html:5
