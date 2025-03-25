@@ -173,11 +173,16 @@ msgid "Logout"
 msgstr "Выход"
 
 #: task_manager/templates/base.html:32
+msgctxt "base"
+msgid "Login"
+msgstr "Вход"
+
 #: task_manager/templates/users/login.html:5
 #: task_manager/templates/users/login.html:8
 #: task_manager/templates/users/login.html:13
+msgctxt "login"
 msgid "Login"
-msgstr "Вход"
+msgstr "Войти"
 
 #: task_manager/templates/base.html:33
 #: task_manager/templates/users/create.html:13
