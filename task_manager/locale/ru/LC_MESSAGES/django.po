@@ -380,8 +380,8 @@ msgstr "У вас нет прав удалять другого пользова
 
 #: task_manager/views.py:95
 msgid "You are logged in"
-msgstr "Вы вошли"
+msgstr "Вы залогинены"
 
 #: task_manager/views.py:103
 msgid "You are logged out"
-msgstr "Вы вышли"
+msgstr "Вы разлогинены"
