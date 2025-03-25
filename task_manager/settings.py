@@ -15,13 +15,14 @@ from dotenv import load_dotenv
 import os
 import dj_database_url
 from django.utils.translation import gettext_lazy as _
+from django.contrib.messages import constants as messages_constants
+import rollbar
 
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-from django.contrib.messages import constants as messages_constants
 
 MESSAGE_TAGS = {
     messages_constants.ERROR: "danger",
@@ -30,10 +31,10 @@ MESSAGE_TAGS = {
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-6i_v01dg)-sg^&z8p76+%@4&g@n#t*wwnt%s8t^+oo-m0*lxge"
+SECRET_KEY = os.getenv('SECRET_KEY','default_secret_key_value')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG=True
 
 ALLOWED_HOSTS = ["webserver", "127.0.0.1", "python-project-52-yt5k.onrender.com"]
 
@@ -148,9 +149,16 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-ROLLBAR = {
-    "access_token": "98788678f63e4e08857705cd5a0c28d0",
-    "environment": "development" if DEBUG else "production",
-    "code_version": "1.0",
-    "root": BASE_DIR,
-}
+# ROLLBAR = {
+#     "access_token": "98788678f63e4e08857705cd5a0c28d0",
+#     "environment": "development" if DEBUG else "production",
+#     "code_version": "1.0",
+#     "root": BASE_DIR,
+# }
+if not rollbar._initialized:  # Проверка, инициализирован ли Rollbar
+    rollbar.init(
+        access_token=os.getenv('ACCESS_TOKEN'),
+        environment='development' if DEBUG else 'production',
+        code_version="1.0",
+        root=BASE_DIR,
+    )
