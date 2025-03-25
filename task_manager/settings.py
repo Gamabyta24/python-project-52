@@ -125,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru"
 USE_I18N = True
 USE_L10N = True
 LOCALE_PATHS = [BASE_DIR / "locale"]
@@ -136,8 +136,8 @@ USE_I18N = True
 USE_TZ = True
 
 LANGUAGES = [
-    ("en", _("English")),
     ("ru", _("Russian")),
+    ("en", _("English")),
 ]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
