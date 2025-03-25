@@ -8,3 +8,5 @@ migrate:
 	python manage.py migrate
 start:
 	python manage.py runserver
+ruff:
+	uv run ruff check task_manager
