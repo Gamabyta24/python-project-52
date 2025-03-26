@@ -30,7 +30,7 @@
                         </li>
                     {% else %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">{% trans "Login" context "base" %}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'user_create' %}">{% trans "Register" %}</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'user_create' %}">{% trans "Register" context "base_reg" %}</a></li>
                     {% endif %}
                 </ul>
                 <form action="{% url 'set_language' %}" method="post">
