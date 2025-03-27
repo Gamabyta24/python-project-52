@@ -131,7 +131,7 @@ msgstr "Описание"
 #: task_manager/tasks/models.py:18 task_manager/templates/tasks/detail.html:17
 #: task_manager/templates/tasks/index.html:28
 msgid "Creator"
-msgstr "Создатель"
+msgstr "Автор"
 
 #: task_manager/tasks/models.py:37
 msgid "Task"

@@ -23,6 +23,16 @@
                 {% endif %}
             </p>
             <p><strong>{% trans "Created at" %}:</strong> {{ task.created_at|date:"d.m.Y H:i" }}</p>
+            <p>
+                <strong>{% trans "Labels" %}:</strong> 
+                {% if task.labels.all %}
+                    {% for label in task.labels.all %}
+                        <span class="badge bg-secondary me-1">{{ label.name }}</span>
+                    {% endfor %}
+                {% else %}
+                    -
+                {% endif %}
+            </p>
         </div>
     </div>
     
