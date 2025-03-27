@@ -40,6 +40,12 @@ class TaskFilter(django_filters.FilterSet):
             return queryset.filter(creator=self.request.user)
         return queryset
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Кастомное отображение для выбора исполнителя
+        if 'executor' in self.form.fields:
+            self.form.fields['executor'].label_from_instance = lambda obj: (f"{obj.first_name} {obj.last_name}".strip() or obj.username)
+
     class Meta:
         model = Task
         fields = ["status", "executor", "labels", "self_tasks"]
