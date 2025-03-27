@@ -157,7 +157,7 @@ msgstr "Задача успешно удалена"
 
 #: task_manager/tasks/views.py:85
 msgid "Only the author of the task can delete it"
-msgstr "Только автор задачи может удалить ее"
+msgstr "Задачу может удалить только ее автор"
 
 #: task_manager/templates/base.html:14
 msgid "Task manager"
