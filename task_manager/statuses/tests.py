@@ -1,6 +1,7 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth.models import User
+
 from .models import Status
 
 
@@ -19,7 +20,9 @@ class StatusCRUDTest(TestCase):
     def test_status_list_view_requires_login(self):
         # Test that status list requires login
         response = self.client.get(reverse("statuses"))
-        self.assertRedirects(response, f'{self.login_url}?next={reverse("statuses")}')
+        self.assertRedirects(
+            response, f'{self.login_url}?next={reverse("statuses")}'
+        )
 
         # Login and try again
         self.client.login(username="testuser", password="testpassword")
@@ -40,7 +43,9 @@ class StatusCRUDTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Test creating a new status
-        response = self.client.post(reverse("status_create"), {"name": "New Status"})
+        response = self.client.post(
+            reverse("status_create"), {"name": "New Status"}
+        )
         self.assertRedirects(response, reverse("statuses"))
 
         # Check that the status was created
@@ -48,20 +53,23 @@ class StatusCRUDTest(TestCase):
 
     def test_status_update_view(self):
         # Test that status update requires login
-        response = self.client.get(reverse("status_update", args=[self.status.id]))
-        self.assertRedirects(
-            response,
-            f'{self.login_url}?next={reverse("status_update", args=[self.status.id])}',
+        response = self.client.get(
+            reverse("status_update", args=[self.status.id])
         )
+        next_url = reverse("status_update", args=[self.status.id])
+        self.assertRedirects(response, f'{self.login_url}?next={next_url}')
 
         # Login and test update
         self.client.login(username="testuser", password="testpassword")
-        response = self.client.get(reverse("status_update", args=[self.status.id]))
+        response = self.client.get(
+            reverse("status_update", args=[self.status.id])
+        )
         self.assertEqual(response.status_code, 200)
 
         # Test updating a status
         response = self.client.post(
-            reverse("status_update", args=[self.status.id]), {"name": "Updated Status"}
+            reverse("status_update", args=[self.status.id]),
+            {"name": "Updated Status"},
         )
         self.assertRedirects(response, reverse("statuses"))
 
@@ -71,19 +79,23 @@ class StatusCRUDTest(TestCase):
 
     def test_status_delete_view(self):
         # Test that status deletion requires login
-        response = self.client.get(reverse("status_delete", args=[self.status.id]))
-        self.assertRedirects(
-            response,
-            f'{self.login_url}?next={reverse("status_delete", args=[self.status.id])}',
+        response = self.client.get(
+            reverse("status_delete", args=[self.status.id])
         )
+        next_url = reverse("status_delete", args=[self.status.id])
+        self.assertRedirects(response, f'{self.login_url}?next={next_url}')
 
         # Login and test deletion
         self.client.login(username="testuser", password="testpassword")
-        response = self.client.get(reverse("status_delete", args=[self.status.id]))
+        response = self.client.get(
+            reverse("status_delete", args=[self.status.id])
+        )
         self.assertEqual(response.status_code, 200)
 
         # Test deleting a status
-        response = self.client.post(reverse("status_delete", args=[self.status.id]))
+        response = self.client.post(
+            reverse("status_delete", args=[self.status.id])
+        )
         self.assertRedirects(response, reverse("statuses"))
 
         # Check that the status was deleted

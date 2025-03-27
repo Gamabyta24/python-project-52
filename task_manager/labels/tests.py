@@ -1,9 +1,11 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth.models import User
-from .models import Label
-from task_manager.tasks.models import Task
+
 from task_manager.statuses.models import Status
+from task_manager.tasks.models import Task
+
+from .models import Label
 
 
 class LabelCRUDTest(TestCase):
@@ -24,7 +26,9 @@ class LabelCRUDTest(TestCase):
     def test_label_list_view_requires_login(self):
         # Test that label list requires login
         response = self.client.get(reverse("labels"))
-        self.assertRedirects(response, f'{self.login_url}?next={reverse("labels")}')
+        self.assertRedirects(
+            response, f'{self.login_url}?next={reverse("labels")}'
+        )
 
         # Login and try again
         self.client.login(username="testuser", password="testpassword")
@@ -45,7 +49,9 @@ class LabelCRUDTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Test creating a new label
-        response = self.client.post(reverse("label_create"), {"name": "New Label"})
+        response = self.client.post(
+            reverse("label_create"), {"name": "New Label"}
+        )
         self.assertRedirects(response, reverse("labels"))
 
         # Check that the label was created
@@ -53,20 +59,23 @@ class LabelCRUDTest(TestCase):
 
     def test_label_update_view(self):
         # Test that label update requires login
-        response = self.client.get(reverse("label_update", args=[self.label.id]))
-        self.assertRedirects(
-            response,
-            f'{self.login_url}?next={reverse("label_update", args=[self.label.id])}',
+        response = self.client.get(
+            reverse("label_update", args=[self.label.id])
         )
+        next_url = reverse("label_update", args=[self.label.id])
+        self.assertRedirects(response, f'{self.login_url}?next={next_url}')
 
         # Login and test update
         self.client.login(username="testuser", password="testpassword")
-        response = self.client.get(reverse("label_update", args=[self.label.id]))
+        response = self.client.get(
+            reverse("label_update", args=[self.label.id])
+        )
         self.assertEqual(response.status_code, 200)
 
         # Test updating a label
         response = self.client.post(
-            reverse("label_update", args=[self.label.id]), {"name": "Updated Label"}
+            reverse("label_update", args=[self.label.id]),
+            {"name": "Updated Label"},
         )
         self.assertRedirects(response, reverse("labels"))
 
@@ -76,19 +85,23 @@ class LabelCRUDTest(TestCase):
 
     def test_label_delete_view(self):
         # Test that label deletion requires login
-        response = self.client.get(reverse("label_delete", args=[self.label.id]))
-        self.assertRedirects(
-            response,
-            f'{self.login_url}?next={reverse("label_delete", args=[self.label.id])}',
+        response = self.client.get(
+            reverse("label_delete", args=[self.label.id])
         )
+        next_url = reverse("label_delete", args=[self.label.id])
+        self.assertRedirects(response, f'{self.login_url}?next={next_url}')
 
         # Login and test deletion
         self.client.login(username="testuser", password="testpassword")
-        response = self.client.get(reverse("label_delete", args=[self.label.id]))
+        response = self.client.get(
+            reverse("label_delete", args=[self.label.id])
+        )
         self.assertEqual(response.status_code, 200)
 
         # Test deleting a label
-        response = self.client.post(reverse("label_delete", args=[self.label.id]))
+        response = self.client.post(
+            reverse("label_delete", args=[self.label.id])
+        )
         self.assertRedirects(response, reverse("labels"))
 
         # Check that the label was deleted
@@ -108,7 +121,9 @@ class LabelCRUDTest(TestCase):
         task.labels.add(self.label)
 
         # Try to delete the label
-        response = self.client.post(reverse("label_delete", args=[self.label.id]))
+        response = self.client.post(
+            reverse("label_delete", args=[self.label.id])
+        )
 
         # Should redirect back to labels with error message
         self.assertRedirects(response, reverse("labels"))

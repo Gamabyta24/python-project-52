@@ -9,4 +9,6 @@ migrate:
 start:
 	python manage.py runserver
 ruff:
-	uv run ruff check task_manager
+	uv run ruff check task_manager/
+format:
+	uv run black task_manager/

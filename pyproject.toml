@@ -12,6 +12,7 @@ dependencies = [
     "django-filter>=25.1",
     "gunicorn>=23.0.0",
     "i18n>=0.2",
+    "isort>=6.0.1",
     "psycopg2-binary>=2.9.10",
     "python-dotenv>=1.0.1",
     "rollbar>=1.2.0",
@@ -23,3 +24,8 @@ build-backend = "hatchling.build"
  
 [tool.hatch.build.targets.wheel]
 packages = ["task_manager"]
+
+[tool.black]
+line-length = 80
+multi-line-output = 3
+include-trailing-comma = true

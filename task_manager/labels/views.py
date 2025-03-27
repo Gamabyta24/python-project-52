@@ -1,11 +1,12 @@
-from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from .models import Label
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+
 from .forms import LabelForm
+from .models import Label
 
 
 class LabelListView(LoginRequiredMixin, ListView):
@@ -49,7 +50,9 @@ class LabelDeleteView(LoginRequiredMixin, DeleteView):
         label = self.get_object()
         # Проверяем, используется ли метка в задачах
         if label.tasks.exists():
-            messages.error(self.request, _("Cannot delete a label that is in use"))
+            messages.error(
+                self.request, _("Cannot delete a label that is in use")
+            )
             return redirect("labels")
         return super().post(request, *args, **kwargs)
 

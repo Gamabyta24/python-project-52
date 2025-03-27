@@ -1,10 +1,12 @@
 import django_filters
 from django import forms
-from django.utils.translation import gettext_lazy as _
-from .models import Task
-from task_manager.labels.models import Label
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
+
+from task_manager.labels.models import Label
 from task_manager.statuses.models import Status
+
+from .models import Task
 
 
 class TaskFilter(django_filters.FilterSet):
@@ -43,8 +45,10 @@ class TaskFilter(django_filters.FilterSet):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Кастомное отображение для выбора исполнителя
-        if 'executor' in self.form.fields:
-            self.form.fields['executor'].label_from_instance = lambda obj: (f"{obj.first_name} {obj.last_name}".strip() or obj.username)
+        if "executor" in self.form.fields:
+            self.form.fields["executor"].label_from_instance = lambda obj: (
+                f"{obj.first_name} {obj.last_name}".strip() or obj.username
+            )
 
     class Meta:
         model = Task

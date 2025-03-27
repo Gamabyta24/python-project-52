@@ -3,13 +3,15 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render, redirect
+from django.db.models import Q
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from .forms import UserRegistrationForm
-from django.db.models import Q
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+
 from task_manager.tasks.models import Task
+
+from .forms import UserRegistrationForm
 
 
 def index(request):
@@ -40,7 +42,6 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     success_url = reverse_lazy("users")
 
     def test_func(self):
-        # Проверка, что пользователь изменяет только свой профиль
         return self.request.user.id == self.kwargs["pk"]
 
     def form_valid(self, form):
@@ -48,7 +49,9 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().form_valid(form)
 
     def handle_no_permission(self):
-        messages.error(self.request, _("You have no rights to change another user"))
+        messages.error(
+            self.request, _("You have no rights to change another user")
+        )
         return redirect("users")
 
 
@@ -58,19 +61,15 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     success_url = reverse_lazy("users")
 
     def test_func(self):
-        # Проверка, что пользователь удаляет только свой профиль
         return self.request.user.id == self.kwargs["pk"]
 
-    # def form_valid(self, form):
-    #     messages.success(self.request, _('User successfully deleted'))
-    #     return super().form_valid(form)
     def post(self, request, *args, **kwargs):
         user = self.get_object()
 
-        # Check if user is associated with any tasks
         if Task.objects.filter(Q(creator=user) | Q(executor=user)).exists():
             messages.error(
-                self.request, _("Cannot delete user because they have associated tasks")
+                self.request,
+                _("Cannot delete user because they have associated tasks"),
             )
             return redirect("users")
 

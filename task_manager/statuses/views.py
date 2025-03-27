@@ -1,11 +1,12 @@
-from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from .models import Status
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+
 from .forms import StatusForm
+from .models import Status
 
 
 class StatusListView(LoginRequiredMixin, ListView):

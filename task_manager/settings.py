@@ -10,13 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path
-from dotenv import load_dotenv
 import os
+from pathlib import Path
+
 import dj_database_url
-from django.utils.translation import gettext_lazy as _
-from django.contrib.messages import constants as messages_constants
 import rollbar
+from django.contrib.messages import constants as messages_constants
+from django.utils.translation import gettext_lazy as _
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -31,12 +32,16 @@ MESSAGE_TAGS = {
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY','default_secret_key_value')
+SECRET_KEY = os.getenv("SECRET_KEY", "default_secret_key_value")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG=True
+DEBUG = True
 
-ALLOWED_HOSTS = ["webserver", "127.0.0.1", "python-project-52-yt5k.onrender.com"]
+ALLOWED_HOSTS = [
+    "webserver",
+    "127.0.0.1",
+    "python-project-52-yt5k.onrender.com",
+]
 
 
 # Application definition
@@ -157,8 +162,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # }
 if not rollbar._initialized:  # Проверка, инициализирован ли Rollbar
     rollbar.init(
-        access_token=os.getenv('ACCESS_TOKEN'),
-        environment='development' if DEBUG else 'production',
+        access_token=os.getenv("ACCESS_TOKEN"),
+        environment="development" if DEBUG else "production",
         code_version="1.0",
         root=BASE_DIR,
     )

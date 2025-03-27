@@ -4,16 +4,16 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 from django.views.generic import (
-    ListView,
     CreateView,
-    UpdateView,
     DeleteView,
     DetailView,
+    ListView,
+    UpdateView,
 )
 
-from .models import Task
-from .forms import TaskForm
 from .filters import TaskFilter
+from .forms import TaskForm
+from .models import Task
 
 
 class TaskListView(LoginRequiredMixin, ListView):
@@ -82,7 +82,9 @@ class TaskDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return super().form_valid(form)
 
     def handle_no_permission(self):
-        messages.error(self.request, _("Only the author of the task can delete it"))
+        messages.error(
+            self.request, _("Only the author of the task can delete it")
+        )
         return redirect("tasks")
 
 
