@@ -375,7 +375,7 @@ msgstr "Пользователь успешно изменен"
 
 #: task_manager/views.py:51
 msgid "You have no rights to change another user"
-msgstr "У вас нет прав на изменение другого пользователя"
+msgstr "У вас нет прав для изменения другого пользователя."
 
 #: task_manager/views.py:73
 msgid "Cannot delete user because they have associated tasks"
@@ -388,7 +388,7 @@ msgstr "Пользователь успешно удален"
 
 #: task_manager/views.py:83
 msgid "You have no rights to delete another user"
-msgstr "У вас нет прав удалять другого пользователя"
+msgstr "У вас нет прав для изменения другого пользователя."
 
 #: task_manager/views.py:95
 msgid "You are logged in"
