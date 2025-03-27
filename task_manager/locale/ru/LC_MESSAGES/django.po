@@ -305,7 +305,7 @@ msgstr "Фильтр"
 
 #: task_manager/templates/tasks/index.html:15
 msgid "Apply"
-msgstr "Принять"
+msgstr "Показать"
 
 #: task_manager/templates/tasks/index.html:58
 msgid "No tasks available"
