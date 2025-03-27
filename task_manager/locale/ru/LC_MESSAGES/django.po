@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-26 13:49+0300\n"
+"POT-Creation-Date: 2025-03-27 14:20+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgstr "Такой пользователь уже существует"
 
 #: task_manager/labels/forms.py:11 task_manager/labels/models.py:6
 #: task_manager/statuses/forms.py:11 task_manager/statuses/models.py:6
-#: task_manager/tasks/forms.py:11 task_manager/tasks/models.py:9
+#: task_manager/tasks/forms.py:16 task_manager/tasks/models.py:9
 #: task_manager/templates/labels/index.html:16
 #: task_manager/templates/statuses/index.html:16
 #: task_manager/templates/tasks/index.html:26
@@ -50,12 +50,11 @@ msgid "Created at"
 msgstr "Дата создания"
 
 #: task_manager/labels/models.py:13 task_manager/tasks/filters.py:22
-#: task_manager/tasks/forms.py:15
 msgid "Label"
 msgstr "Метка"
 
-#: task_manager/labels/models.py:14 task_manager/tasks/models.py:29
-#: task_manager/templates/base.html:24
+#: task_manager/labels/models.py:14 task_manager/tasks/forms.py:20
+#: task_manager/tasks/models.py:29 task_manager/templates/base.html:24
 #: task_manager/templates/labels/index.html:5
 #: task_manager/templates/labels/index.html:8
 msgid "Labels"
@@ -86,7 +85,7 @@ msgid "English"
 msgstr ""
 
 #: task_manager/statuses/models.py:13 task_manager/tasks/filters.py:12
-#: task_manager/tasks/forms.py:13 task_manager/tasks/models.py:12
+#: task_manager/tasks/forms.py:18 task_manager/tasks/models.py:12
 #: task_manager/templates/tasks/detail.html:16
 #: task_manager/templates/tasks/index.html:27
 msgid "Status"
@@ -114,7 +113,7 @@ msgstr "Статус успешно удален"
 msgid "Cannot delete status because it is in use"
 msgstr "Невозможно удалить статус пока он используется"
 
-#: task_manager/tasks/filters.py:17 task_manager/tasks/forms.py:14
+#: task_manager/tasks/filters.py:17 task_manager/tasks/forms.py:19
 #: task_manager/tasks/models.py:26 task_manager/templates/tasks/detail.html:18
 #: task_manager/templates/tasks/index.html:29
 msgid "Executor"
@@ -124,7 +123,7 @@ msgstr "Исполнитель"
 msgid "Only my tasks"
 msgstr "Только мои задачи"
 
-#: task_manager/tasks/forms.py:12 task_manager/tasks/models.py:10
+#: task_manager/tasks/forms.py:17 task_manager/tasks/models.py:10
 #: task_manager/templates/tasks/detail.html:15
 msgid "Description"
 msgstr "Описание"
@@ -380,7 +379,8 @@ msgstr "У вас нет прав на изменение другого пол�
 
 #: task_manager/views.py:73
 msgid "Cannot delete user because they have associated tasks"
-msgstr "Невозможно удалить пользователя потому что имеются связанные с ним задачи"
+msgstr ""
+"Невозможно удалить пользователя потому что имеются связанные с ним задачи"
 
 #: task_manager/views.py:77
 msgid "User successfully deleted"
