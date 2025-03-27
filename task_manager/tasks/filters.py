@@ -12,17 +12,17 @@ from .models import Task
 class TaskFilter(django_filters.FilterSet):
     status = django_filters.ModelChoiceFilter(
         label=_("Status"),
-        queryset=Status.objects.all(),  # Use .all() as a method call
+        queryset=Status.objects.all(),
     )
 
     executor = django_filters.ModelChoiceFilter(
         label=_("Executor"),
-        queryset=User.objects.all(),  # Use .all() as a method call
+        queryset=User.objects.all(),
     )
 
     labels = django_filters.ModelChoiceFilter(
         label=_("Label"),
-        queryset=Label.objects.all(),  # Use .all() as a method call
+        queryset=Label.objects.all(),
         method="filter_by_labels",
     )
 
