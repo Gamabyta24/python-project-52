@@ -3,43 +3,20 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
-from django.views.generic import (
-    CreateView,
-    DeleteView,
-    DetailView,
-    ListView,
-    UpdateView,
-)
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
+from django_filters.views import FilterView
 
 from .filters import TaskFilter
 from .forms import TaskForm
 from .models import Task
 
 
-class TaskListView(LoginRequiredMixin, ListView):
+class TaskListView(LoginRequiredMixin, FilterView):
     model = Task
     template_name = "tasks/index.html"
     context_object_name = "tasks"
     login_url = reverse_lazy("login")
     filterset_class = TaskFilter
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        filter_applied = any(
-            self.request.GET.get(key)
-            for key in ["status", "executor", "labels", "self_tasks"]
-        )
-        self.filterset = self.filterset_class(
-            self.request.GET if filter_applied else None,
-            queryset=queryset,
-            request=self.request,
-        )
-        return self.filterset.qs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["filter"] = self.filterset
-        return context
 
 
 class TaskCreateView(LoginRequiredMixin, CreateView):

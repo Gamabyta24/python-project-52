@@ -42,27 +42,15 @@ class UserUpdateView(LoginRequiredMixin, UserPermissionMixin, UpdateView):
     template_name = "users/update.html"
     success_url = reverse_lazy("users")
 
-    # def test_func(self):
-    #     return self.request.user.id == self.kwargs["pk"]
-
     def form_valid(self, form):
         messages.success(self.request, _("User successfully updated"))
         return super().form_valid(form)
-
-    # def handle_no_permission(self):
-    #     messages.error(
-    #         self.request, _("You have no rights to change another user")
-    #     )
-    #     return redirect("users")
 
 
 class UserDeleteView(LoginRequiredMixin, UserPermissionMixin, DeleteView):
     model = User
     template_name = "users/delete.html"
     success_url = reverse_lazy("users")
-
-    # def test_func(self):
-    #     return self.request.user.id == self.kwargs["pk"]
 
     def post(self, request, *args, **kwargs):
         user = self.get_object()
@@ -76,14 +64,6 @@ class UserDeleteView(LoginRequiredMixin, UserPermissionMixin, DeleteView):
 
         messages.success(self.request, _("User successfully deleted"))
         return super().post(request, *args, **kwargs)
-
-    # def handle_no_permission(self):
-    #     messages.error(
-    #         self.request,
-    #         _("You have no rights to delete another user"),
-    #         extra_tags="danger",
-    #     )
-    #     return redirect("users")
 
 
 class UserLoginView(LoginView):
