@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
 from django.db.models import Q
@@ -12,6 +12,7 @@ from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from task_manager.tasks.models import Task
 
 from .forms import UserRegistrationForm
+from .mixins import UserPermissionMixin
 
 
 def index(request):
@@ -35,33 +36,33 @@ class UserCreateView(CreateView):
         return super().form_valid(form)
 
 
-class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class UserUpdateView(LoginRequiredMixin, UserPermissionMixin, UpdateView):
     model = User
     form_class = UserRegistrationForm
     template_name = "users/update.html"
     success_url = reverse_lazy("users")
 
-    def test_func(self):
-        return self.request.user.id == self.kwargs["pk"]
+    # def test_func(self):
+    #     return self.request.user.id == self.kwargs["pk"]
 
     def form_valid(self, form):
         messages.success(self.request, _("User successfully updated"))
         return super().form_valid(form)
 
-    def handle_no_permission(self):
-        messages.error(
-            self.request, _("You have no rights to change another user")
-        )
-        return redirect("users")
+    # def handle_no_permission(self):
+    #     messages.error(
+    #         self.request, _("You have no rights to change another user")
+    #     )
+    #     return redirect("users")
 
 
-class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class UserDeleteView(LoginRequiredMixin, UserPermissionMixin, DeleteView):
     model = User
     template_name = "users/delete.html"
     success_url = reverse_lazy("users")
 
-    def test_func(self):
-        return self.request.user.id == self.kwargs["pk"]
+    # def test_func(self):
+    #     return self.request.user.id == self.kwargs["pk"]
 
     def post(self, request, *args, **kwargs):
         user = self.get_object()
@@ -76,13 +77,13 @@ class UserDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         messages.success(self.request, _("User successfully deleted"))
         return super().post(request, *args, **kwargs)
 
-    def handle_no_permission(self):
-        messages.error(
-            self.request,
-            _("You have no rights to delete another user"),
-            extra_tags="danger",
-        )
-        return redirect("users")
+    # def handle_no_permission(self):
+    #     messages.error(
+    #         self.request,
+    #         _("You have no rights to delete another user"),
+    #         extra_tags="danger",
+    #     )
+    #     return redirect("users")
 
 
 class UserLoginView(LoginView):

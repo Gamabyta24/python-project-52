@@ -63,7 +63,7 @@ class LabelCRUDTest(TestCase):
             reverse("label_update", args=[self.label.id])
         )
         next_url = reverse("label_update", args=[self.label.id])
-        self.assertRedirects(response, f'{self.login_url}?next={next_url}')
+        self.assertRedirects(response, f"{self.login_url}?next={next_url}")
 
         # Login and test update
         self.client.login(username="testuser", password="testpassword")
@@ -89,7 +89,7 @@ class LabelCRUDTest(TestCase):
             reverse("label_delete", args=[self.label.id])
         )
         next_url = reverse("label_delete", args=[self.label.id])
-        self.assertRedirects(response, f'{self.login_url}?next={next_url}')
+        self.assertRedirects(response, f"{self.login_url}?next={next_url}")
 
         # Login and test deletion
         self.client.login(username="testuser", password="testpassword")

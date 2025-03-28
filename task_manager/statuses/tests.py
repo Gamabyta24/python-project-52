@@ -57,7 +57,7 @@ class StatusCRUDTest(TestCase):
             reverse("status_update", args=[self.status.id])
         )
         next_url = reverse("status_update", args=[self.status.id])
-        self.assertRedirects(response, f'{self.login_url}?next={next_url}')
+        self.assertRedirects(response, f"{self.login_url}?next={next_url}")
 
         # Login and test update
         self.client.login(username="testuser", password="testpassword")
@@ -83,7 +83,7 @@ class StatusCRUDTest(TestCase):
             reverse("status_delete", args=[self.status.id])
         )
         next_url = reverse("status_delete", args=[self.status.id])
-        self.assertRedirects(response, f'{self.login_url}?next={next_url}')
+        self.assertRedirects(response, f"{self.login_url}?next={next_url}")
 
         # Login and test deletion
         self.client.login(username="testuser", password="testpassword")
